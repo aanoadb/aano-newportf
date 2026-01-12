@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhmad Subkhan - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="scroll-progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo"><span>Akhmad Subkhan</span></a>
+            
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Tech Stack</a>
+                <a href="#certificates">Certifications</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#experience" class="mobile-nav-link">Experience</a>
+            <a href="#skills" class="mobile-nav-link">Tech Stack</a>
+            <a href="#certificates" class="mobile-nav-link">Certifications</a>
+            <a href="#projects" class="mobile-nav-link">Projects</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Background dengan Gambar -->
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" 
+                 alt="Server Room Background" 
+                 class="hero-bg-image">
+            <div class="hero-bg-overlay"></div>
+        </div>
+
+        <!-- Bubbles Elegan -->
+        <div class="bubbles-container" id="bubblesContainer"></div>
+
+        <div class="hero-terminal">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span class="terminal-title">terminal — bash</span>
+            </div>
+            <div class="terminal-body">
+                <p class="terminal-line"><span class="prompt">$</span> whoami</p>
+                <p class="terminal-output">Junior System Administrator</p>
+                <p class="terminal-line"><span class="prompt">$</span> cat profile.txt</p>
+                <p class="terminal-output">Akhmad Subkhan • Jakarta, Indonesia</p>
+                <p class="terminal-line"><span class="prompt">$</span> <span class="cursor">█</span></p>
+            </div>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">1+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Projects Deployed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Learning</div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll to explore</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">About Me</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p>I am Akhmad Subkhan, a Junior System Administrator at PT Dasa Aprilindo Sentosa and a graduate of SMKN 1 Adiwerna. Currently serving as a 1st layer system administrator, I specialize in managing Red Hat systems and monitoring performance with Dynatrace.</p>
+                
+                <p>I am also proficient in maintaining security through Microsoft Defender, Trellix, and Xecureclient, ensuring robust and reliable IT infrastructure. Enjoy and Stay Classy. </p>
+                
+                <!-- Social Links with Labels -->
+                <div class="social-links-with-labels">
+                    <a href="https://www.linkedin.com/in/akhmad-subkhan/" target="_blank" rel="noopener noreferrer" class="social-link-labeled">
+                        <i class="fab fa-linkedin"></i>
+                        <span>Akhmad Subkhan</span>
+                    </a>
+                    <a href="https://github.com/aanoadb" target="_blank" rel="noopener noreferrer" class="social-link-labeled">
+                        <i class="fab fa-github"></i>
+                        <span>aanoadb</span>
+                    </a>
+                    <a href="https://instagram.com/aanoo.o" target="_blank" rel="noopener noreferrer" class="social-link-labeled">
+                        <i class="fab fa-instagram"></i>
+                        <span>aanoo.o</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Work Experience</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">January 2026 - Present</div>
+                    <h3 class="timeline-role">System Administrator</h3>
+                    <div class="timeline-company">PT Dasa Aprilindo Sentosa</div>
+                    <p class="timeline-description">
+                        1st system administrator with a focus on managing Red Hat OpenShift, Red Hat Enterprise Linux, Dynatrace, Microsoft Defender, Trellix, and XecureClient.
+                    </p>
+                    <div class="timeline-tech">
+                        <span>Red Hat Enterprise Linux</span>
+                        <span>Red Hat OpenShift Container Platform</span>
+                        <span>Dynatrace</span>
+                        <span>Microsoft Defender</span>
+                        <span>Trellix</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">June 2025 - December 2025</div>
+                    <h3 class="timeline-role">System Engineer</h3>
+                    <div class="timeline-company">PT Median Talenta Raya</div>
+                    <p class="timeline-description">
+                        1st system engineer with a focus on managing Red Hat OpenShift, Red Hat Enterprise Linux, Dynatrace, Microsoft Defender, Trellix, and XecureClient.
+                    </p>
+                    <div class="timeline-tech">
+                        <span>Red Hat Enterprise Linux</span>
+                        <span>Red Hat OpenShift Container Platform</span>
+                        <span>Dynatrace</span>
+                        <span>Microsoft Defender</span>
+                        <span>Trellix</span>
+                        <span>SKCK Technical Support (Temporary)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">August 2024 - May 2025</div>
+                    <h3 class="timeline-role">Presales Engineer</h3>
+                    <div class="timeline-company">PT Dasa Aprilindo Sentosa</div>
+                    <p class="timeline-description">
+                        Studying presales with a focus on Red Hat products while working as a junior system engineer.
+                    </p>
+                    <div class="timeline-tech">
+                        <span>Red Hat Enterprise Linux</span>
+                        <span>Red Hat OpenShift Container Platform</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker">
+                    <div class="marker-dot"></div>
+                    <div class="marker-line"></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">October 2023 - April 2025</div>
+                    <h3 class="timeline-role">Student Internship</h3>
+                    <div class="timeline-company">PT Nusantara Technology</div>
+                    <p class="timeline-description">
+                        Vocational school internship and learning about system administrator implementation and also a little bit about DevOps.
+                    </p>
+                    <div class="timeline-tech">
+                        <span>Linux</span>
+                        <span>Docker</span>
+                        <span>Gitlab CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="skills" class="section skills-section">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Technical Stack</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="skills-tags">
+            <div class="skill-tag">Linux</div>
+            <div class="skill-tag">OpenShift</div>
+            <div class="skill-tag">OKD</div>
+            <div class="skill-tag">Dynatrace</div>
+            <div class="skill-tag">Microsoft Defender</div>
+            <div class="skill-tag">Trellix</div>
+            <div class="skill-tag">XecureClient</div>
+            <div class="skill-tag">Podman</div>
+            <div class="skill-tag">Docker</div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section certificates-section">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Certifications</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="certificates-grid">
+            <div class="certificate-card" data-logo-color="#ee0000">
+                <div class="certificate-icon">
+                    <i class="fab fa-redhat"></i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Red Hat Certified System Administrator</h3>
+                    <p class="certificate-issuer">Red Hat</p>
+                    <p class="certificate-date">Issued: Nov 2023</p>
+                    <a href="https://www.redhat.com/rhtapps/certification/verify/?certId=EX200" target="_blank" rel="noopener noreferrer" class="certificate-id">EX200</a>
+                </div>
+            </div>
+            
+            <div class="certificate-card" data-logo-color="#ee0000">
+                <div class="certificate-icon">
+                    <i class="fab fa-redhat"></i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Red Hat Certified Specialist in Container</h3>
+                    <p class="certificate-issuer">Red Hat</p>
+                    <p class="certificate-date">Issued: Feb 2025</p>
+                    <a href="https://www.redhat.com/rhtapps/certification/verify/?certId=EX188" target="_blank" rel="noopener noreferrer" class="certificate-id">EX188</a>
+                </div>
+            </div>
+            
+            <div class="certificate-card" data-logo-color="#ff9900">
+                <div class="certificate-icon">
+                    <i class="fas fa-award bnsp-logo">BNSP</i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Junior Web Progammer</h3>
+                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
+                    <p class="certificate-date">Issued: Nov 2023</p>
+                    <a href="#" class="certificate-id">Junior</a>
+                </div>
+            </div>
+            
+            <div class="certificate-card" data-logo-color="#ff9900">
+                <div class="certificate-icon">
+                    <i class="fas fa-award bnsp-logo">BNSP</i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Junior Techincal Support</h3>
+                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
+                    <p class="certificate-date">Issued: Dec 22, 2025</p>
+                    <a href="#" class="certificate-id">Junior</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="section-header">
+            <span class="section-number">05</span>
+            <h2 class="section-title">Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <!-- Projects Container -->
+        <div class="projects-container" id="projectsContainer">
+            <!-- Page 1 - Visible by default -->
+            <div class="projects-page active">
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">01</div>
+                        <div class="project-list-year">BKPM</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">HIGH AVAILABILITY KUBERNETES PLATFORM</h3>
+                        <p class="project-list-period">Period: January 2023 - Present</p>
+                        <p class="project-list-description">
+                            Designed and deployed a production-grade Kubernetes cluster with automated scaling, monitoring, and disaster recovery for financial services company.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Design and architect multi-node Kubernetes cluster infrastructure</li>
+                                <li>Implement automated scaling policies for worker nodes</li>
+                                <li>Configure Prometheus monitoring stack with custom alerts</li>
+                                <li>Setup disaster recovery procedures with Velero backups</li>
+                                <li>Optimize cluster performance and resource allocation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>Kubernetes</span>
+                            <span>Prometheus</span>
+                            <span>Terraform</span>
+                            <span>AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">02</div>
+                        <div class="project-list-year">2023</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">MULTI-CLOUD MIGRATION STRATEGY</h3>
+                        <p class="project-list-period">Period: September 2022 - December 2022</p>
+                        <p class="project-list-description">
+                            Led migration of legacy on-premise systems to AWS and Azure with zero downtime, implementing comprehensive monitoring and security controls.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Assess existing on-premise infrastructure and dependencies</li>
+                                <li>Design hybrid cloud architecture for AWS and Azure</li>
+                                <li>Implement Ansible playbooks for automated deployment</li>
+                                <li>Configure cross-cloud networking and VPN connections</li>
+                                <li>Develop migration runbooks with rollback procedures</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>AWS</span>
+                            <span>Azure</span>
+                            <span>Ansible</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">03</div>
+                        <div class="project-list-year">2022</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">INFRASTRUCTURE MONITORING SYSTEM</h3>
+                        <p class="project-list-period">Period: June 2022 - August 2022</p>
+                        <p class="project-list-description">
+                            Built comprehensive monitoring stack using Prometheus, Grafana, and Alertmanager across 100+ servers with custom dashboards and automated alerts.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Deploy and configure Prometheus across all server nodes</li>
+                                <li>Create custom Grafana dashboards for different teams</li>
+                                <li>Configure Alertmanager with Slack and email notifications</li>
+                                <li>Develop custom exporters for proprietary applications</li>
+                                <li>Implement log aggregation with Loki stack</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>Prometheus</span>
+                            <span>Grafana</span>
+                            <span>Python</span>
+                            <span>Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Page 2 - Hidden by default -->
+            <div class="projects-page">
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">04</div>
+                        <div class="project-list-year">2022</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">CI/CD PIPELINE IMPLEMENTATION</h3>
+                        <p class="project-list-period">Period: March 2022 - May 2022</p>
+                        <p class="project-list-description">
+                            Designed and implemented a complete CI/CD pipeline using Jenkins, GitLab CI, and Docker for automated testing and deployment.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Set up Jenkins master-slave architecture</li>
+                                <li>Configure GitLab CI runners and pipelines</li>
+                                <li>Implement Docker image building and registry management</li>
+                                <li>Create automated testing frameworks</li>
+                                <li>Develop deployment strategies (blue-green, canary)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>Jenkins</span>
+                            <span>GitLab CI</span>
+                            <span>Docker</span>
+                            <span>Bash Scripting</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">05</div>
+                        <div class="project-list-year">2021</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">NETWORK SECURITY HARDENING</h3>
+                        <p class="project-list-period">Period: October 2021 - February 2022</p>
+                        <p class="project-list-description">
+                            Conducted comprehensive network security assessment and implemented hardening measures across enterprise infrastructure.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Perform vulnerability assessment and penetration testing</li>
+                                <li>Implement firewall rules and security policies</li>
+                                <li>Configure IDS/IPS systems</li>
+                                <li>Set up VPN and remote access security</li>
+                                <li>Develop incident response procedures</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>Firewalls</span>
+                            <span>IDS/IPS</span>
+                            <span>VPN</span>
+                            <span>Security Auditing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-list-item">
+                    <div class="project-list-header">
+                        <div class="project-list-number">06</div>
+                        <div class="project-list-year">2021</div>
+                    </div>
+                    <div class="project-list-content">
+                        <h3 class="project-list-title">DATABASE CLUSTER DEPLOYMENT</h3>
+                        <p class="project-list-period">Period: July 2021 - September 2021</p>
+                        <p class="project-list-description">
+                            Deployed and configured high-availability PostgreSQL and MySQL database clusters with replication and failover capabilities.
+                        </p>
+                        
+                        <div class="project-list-jobdesk">
+                            <strong>Job Desk:</strong>
+                            <ul>
+                                <li>Set up master-slave database replication</li>
+                                <li>Configure automated failover with Patroni</li>
+                                <li>Implement database backup and recovery strategies</li>
+                                <li>Optimize database performance and queries</li>
+                                <li>Monitor database health and metrics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-list-tech">
+                            <span>PostgreSQL</span>
+                            <span>MySQL</span>
+                            <span>Patroni</span>
+                            <span>Database Replication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="projects-navigation">
+            <button class="projects-nav-btn" id="prevProjects" aria-label="Previous projects">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="projects-nav-indicator">
+                <span class="current-page">1</span> / <span class="total-pages">2</span>
+            </div>
+            <button class="projects-nav-btn" id="nextProjects" aria-label="Next projects">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="section-header">
+            <span class="section-number">06</span>
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="contact-simple">
+            <div class="contact-simple-content">
+                <h3>Let's Connect</h3>
+                <p>I'm currently available for consulting projects and full-time opportunities. Feel free to reach out through any of these channels.</p>
+                
+                <div class="contact-simple-details">
+                    <div class="contact-simple-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <a href="mailto:akhmadsubkhan2212@gmail.com">akhmadsubkhan2212@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-simple-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <a href="tel:+628975845993">+62 897 5845 993</a>
+                        </div>
+                    </div>
+                    <div class="contact-simple-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-simple-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/akhmad-subkhan/" target="_blank" rel="noopener noreferrer">Akhmad Subkhan</a>
+                        </div>
+                    </div>
+                    <div class="contact-simple-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <a href="https://github.com/aanoadb" target="_blank" rel="noopener noreferrer">aanoadb</a>
+                        </div>
+                    </div>
+                    <div class="contact-simple-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h4>Instagram</h4>
+                            <a href="https://instagram.com/aanoo.o" target="_blank" rel="noopener noreferrer">@aanoo.o</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span></span>
+                <div>
+                    <h3>Akhmad Subkhan</h3>
+                    <p>Junior System Administrator</p>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Tech Stack</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; 2025 Akhmad Subkhan as a Aano. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
