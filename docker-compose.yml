@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build: .
+    container_name: portfolio-app
+    ports:
+      - "8081:8081"
+    environment:
+      - DOMAIN=${DOMAIN:-localhost}
+      - SSL_ENABLED=true
+    volumes:
+      # Mount for persistent SSL certificates (optional)
+      - ./ssl-certs:/etc/nginx/ssl:rw
+      # Mount for Cloudflare config (optional - uncomment when ready)
+      # - ./cloudflare.ini:/etc/cloudflare/cloudflare.ini:ro
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+# Optional: Uncomment when using Cloudflare DNS
+# volumes:
+#   ssl-certs:
