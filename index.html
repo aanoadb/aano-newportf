@@ -3,14 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akhmad Subkhan</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Favicon menggunakan logo -->
-    <link rel="icon" href="src/img/1-logo-dark.png" type="image/png">
+    <title>Akhmad Subkhan - System Administrator</title>
+    
+    <!-- Versioning untuk force refresh cache -->
+    <meta name="version" content="1.0.4">
+    
+    <!-- Critical CSS inline untuk initial render -->
+    <style>
+        /* CRITICAL CSS - Load First */
+        :root {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: #e8e8ed;
+            --bg-tertiary: #d9d9e3;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #666666;
+            --border-color: #c7c7d1;
+            --accent-color: #2c2c2c;
+            --accent-light: #444444;
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --terminal-bg: #ffffff;
+            --terminal-text: #00a67d;
+            --link-color: #0066cc;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1e1e1e;
+            --text-primary: #f8f9fa;
+            --text-secondary: #e9ecef;
+            --text-muted: #adb5bd;
+            --border-color: #2d2d2d;
+            --accent-color: #ffffff;
+            --accent-light: #e0e0e0;
+            --card-bg: #121212;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --terminal-bg: #000000;
+            --terminal-text: #00ff00;
+            --link-color: #4dabf7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Loading indicator */
+        #cssLoading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        #cssLoading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--accent-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Critical navigation styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(245, 245, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo-img {
+            height: 40px;
+            width: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ensure basic section visibility */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: transparent;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Emergency fallback for broken CSS */
+        body.critical-css-failure .navbar,
+        body.critical-css-failure .section,
+        body.critical-css-failure .hero-section {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+    </style>
+    
+    <!-- Main CSS with versioning -->
+    <link rel="stylesheet" href="/style.css?v=1.0.4" id="main-css">
+    
+    <!-- External Resources with SRI -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer"
+          onerror="this.onerror=null;this.href='/fallback-fontawesome.css';">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" 
+          rel="stylesheet"
+          onerror="console.warn('Google Fonts failed to load')">
+    
+    <!-- Favicon with absolute path -->
+    <link rel="icon" href="/src/img/1-logo-dark.png" type="image/png">
+    <link rel="apple-touch-icon" href="/src/img/1-logo-dark.png">
+    
+    <!-- Preconnect for CDN -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Cloudflare Rocket Loader bypass -->
+    <script data-cfasync="false">
+        // Cloudflare Rocket Loader bypass
+        window._cfRocketLoader = window._cfRocketLoader || { 
+            enabled: false,
+            load: function() { return Promise.resolve(); }
+        };
+    </script>
 </head>
 <body>
+    <!-- CSS Loading Indicator -->
+    <div id="cssLoading">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading portfolio...</p>
+        </div>
+    </div>
+
     <!-- Progress Indicator -->
     <div class="scroll-progress">
         <div class="progress-bar" id="progressBar"></div>
@@ -20,7 +233,8 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
-                <img id="navLogo" src="src/img/2-logo-light.png" alt="Logo" class="nav-logo-img">
+                <img id="navLogo" src="/src/img/2-logo-light.png" alt="Akhmad Subkhan Logo" class="nav-logo-img" 
+                     onerror="this.onerror=null;this.src='/src/img/fallback-logo.svg';this.alt='Logo';">
                 <span>Akhmad Subkhan</span>
             </a>
             
@@ -37,7 +251,7 @@
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="menu-toggle" id="menuToggle">
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -58,9 +272,10 @@
     <section id="home" class="hero-section">
         <!-- Background dengan Gambar -->
         <div class="hero-bg">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" 
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80" 
                  alt="Server Room Background" 
-                 class="hero-bg-image">
+                 class="hero-bg-image"
+                 onerror="this.style.display='none'">
             <div class="hero-bg-overlay"></div>
         </div>
 
@@ -80,7 +295,7 @@
                 <p class="terminal-line"><span class="prompt">$</span> whoami</p>
                 <p class="terminal-output">Junior System Administrator</p>
                 <p class="terminal-line"><span class="prompt">$</span> cat profile.txt</p>
-                <p class="terminal-output">Akhmad Subkhan • Jakarta, Indonesia</p>
+                <p class="terminal-output" id="typing-output">Akhmad Subkhan • Jakarta, Indonesia</p>
                 <p class="terminal-line"><span class="prompt">$</span> <span class="cursor">█</span></p>
             </div>
         </div>
@@ -289,19 +504,7 @@
                     <a href="https://www.credly.com/badges/d8b2528a-4f8a-4436-a77d-6039eda819db/linked_in_profile" target="_blank" rel="noopener noreferrer" class="certificate-id">EX188</a>
                 </div>
             </div>
-
-            <div class="certificate-card" data-logo-color="#ff9900">
-                <div class="certificate-icon">
-                    <i class="fas fa-award bnsp-logo">BNSP</i>
-                </div>
-                <div class="certificate-content">
-                    <h3>Junior Techincal Support</h3>
-                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
-                    <p class="certificate-date">Issued: May 2024</p>
-                    <a href="#" class="certificate-id">Junior</a>
-                </div>
-            </div>
-
+            
             <div class="certificate-card" data-logo-color="#ff9900">
                 <div class="certificate-icon">
                     <i class="fas fa-award bnsp-logo">BNSP</i>
@@ -310,10 +513,21 @@
                     <h3>Junior Web Progammer</h3>
                     <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
                     <p class="certificate-date">Issued: Nov 2023</p>
-                    <a href="https://drive.google.com/file/d/1gTrsrMa7AZqUZ1ACV7ymF0PByyKHqeaa/view?usp=drivesdk" target="_blank" rel="noopener noreferrer"class="certificate-id">Junior</a>
+                    <a href="https://drive.google.com/file/d/1gTrsrMa7AZqUZ1ACV7ymF0PByyKHqeaa/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="certificate-id">Junior</a>
                 </div>
             </div>
             
+            <div class="certificate-card" data-logo-color="#ff9900">
+                <div class="certificate-icon">
+                    <i class="fas fa-award bnsp-logo">BNSP</i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Junior Techincal Support</h3>
+                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
+                    <p class="certificate-date">Issued: Dec 22, 2025</p>
+                    <a href="#" class="certificate-id">Junior</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -338,17 +552,17 @@
                         <h3 class="project-list-title">MANAGING BKPM OPENSHIFT CLUSTER</h3>
                         <p class="project-list-period">Period: June 2025 - Present</p>
                         <p class="project-list-description">
-                            Manage and maintain OpenShift production and staging environments for the Badan Koordinasi Penanaman Modal (BKPM) as an 1st Layer System Administrator.
+                            Designed and deployed a production-grade Kubernetes cluster with automated scaling, monitoring, and disaster recovery for financial services company.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Monitor and maintain the health and performance of OpenShift production and staging environments</li>
-                                <li>Execute cluster maintenance and perform initial (L1) troubleshooting for system incidents</li>
-                                <li>Leverage Grafana, Elasticsearch, and Kibana for real-time observability and log analysis</li>
-                                <li>Analyze system metrics to ensure high availability and optimal cluster resource utilization</li>
-                                <li>Generate comprehensive monthly reports regarding cluster health and operational status</li>
+                                <li>Monitor and maintain production & staging cluster health and performance</li>
+                                <li>Basic cluster maintenance tasks and troubleshooting</li>
+                                <li>Grafana dashboards monitoring</li>
+                                <li>Elastic Search & Kibana monitoring</li>
+                                <li>Generate cluster health monthly reports</li>
                             </ul>
                         </div>
                         
@@ -370,17 +584,15 @@
                         <h3 class="project-list-title">MANAGING JSC OPENSHIFT CLUSTER</h3>
                         <p class="project-list-period">Period: September 2025 - Present</p>
                         <p class="project-list-description">
-                            L1 System Administrator responsible for monitoring and maintaining OpenShift production and development environments for Jakarta Smart City (JSC).
+                            Led migration of legacy on-premise systems to AWS and Azure with zero downtime, implementing comprehensive monitoring and security controls.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Monitor and ensure the high availability of OpenShift production and development clusters</li>
-                                <li>Perform OpenShift cluster upgrades and version updates to ensure system stability and security</li>
-                                <li>Execute worker node migrations across environments to optimize resource allocation and infrastructure reliability</li>
-                                <li>Handle cluster maintenance and provide initial (L1) troubleshooting for system alerts and incidents</li>
-                                <li>Compile and deliver comprehensive monthly reports regarding cluster health and performance metrics</li>
+                                <li>Monitor and maintain production & development cluster health and performance</li>
+                                <li>Basic cluster maintenance tasks and troubleshooting</li>
+                                <li>Generate cluster health monthly reports</li>
                             </ul>
                         </div>
                         
@@ -396,18 +608,18 @@
                         <div class="project-list-year">BKPM</div>
                     </div>
                     <div class="project-list-content">
-                        <h3 class="project-list-title">MANAGING BKPM DYNATRACE MONITORING SYSTEM</h3>
+                        <h3 class="project-list-title">MANAGING BKPM DYNATRACTE MONITORING SYSTEM</h3>
                         <p class="project-list-period">Period: July 2025 - Present</p>
                         <p class="project-list-description">
-                            Monitoring OSS Application at Badan Koordinasi Penanaman Modal (BKPM), focusing on full-stack observability using Dynatrace.
+                            Built comprehensive monitoring stack using Prometheus, Grafana, and Alertmanager across 100+ servers with custom dashboards and automated alerts.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Proactively monitor production and staging environments to identify potential performance bottlenecks</li>
-                                <li>Manage initial troubleshooting and system health checks within the Dynatrace platform</li>
-                                <li>Analyze monitoring data to generate detailed monthly reports on system stability and performance</li>
+                                <li>Monitor and maintain production & staging cluster health and performance</li>
+                                <li>Basic cluster maintenance tasks and troubleshooting</li>
+                                <li>Generate cluster health monthly reports</li>
                             </ul>
                         </div>
                         
@@ -429,15 +641,16 @@
                         <h3 class="project-list-title">MANAGING BKPM MICROSOFT DEFENDER</h3>
                         <p class="project-list-period">Period: August 2025 - Present</p>
                         <p class="project-list-description">
-                            L1 support for Badan Koordinasi Penanaman Modal (BKPM), specializing in Microsoft Defender enterprise security.
+                            Designed and implemented a complete CI/CD pipeline using Jenkins, GitLab CI, and Docker for automated testing and deployment.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Conduct daily monitoring of the security environment to ensure optimal protection and performance</li>
-                                <li>Execute basic security maintenance tasks and provide initial response to security incidents</li>
-                                <li>Develop and present daily and monthly security posture reports</li>
+                                <li>Daily Monitor and maintain environment health and performance</li>
+                                <li>Basic maintenance tasks and troubleshooting</li>
+                                <li>Generate daily reports</li>
+                                <li>Generate monthly reports</li>
                             </ul>
                         </div>
                         
@@ -453,18 +666,17 @@
                         <div class="project-list-year">PDAM</div>
                     </div>
                     <div class="project-list-content">
-                        <h3 class="project-list-title">MANAGING PDAM TRELLIX ePO</h3>
+                        <h3 class="project-list-title">MANAGING PDAM TREllIX ePO</h3>
                         <p class="project-list-period">Period: June 2025 - Present</p>
                         <p class="project-list-description">
-                            L1 Endpoint Security Administrator responsible for the maintenance and monitoring of the Trellix ePO environment for PTAM Bandarmasih (PDAM).
+                            Conducted comprehensive network security assessment and implemented hardening measures across enterprise infrastructure.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>L1 technical support and routine maintenance for the Trellix ePO management console</li>
-                                <li>Monitor endpoint compliance and perform initial troubleshooting for security agent issues</li>
-                                <li>Generate detailed quarterly reports regarding endpoint security status and system health</li>
+                                <li>Basic maintenance tasks and troubleshooting</li>
+                                <li>Generate quarterly reports</li>
                             </ul>
                         </div>
                         
@@ -483,15 +695,16 @@
                         <h3 class="project-list-title">XECURECLIENT DEVICE HARDENING</h3>
                         <p class="project-list-period">Period: August 2025 - Present</p>
                         <p class="project-list-description">
-                            Security Technician at Dukcapil, focused on enhancing workstation security through device hardening and multi-factor authentication setup.
+                            Deployed and configured high-availability PostgreSQL and MySQL database clusters with replication and failover capabilities.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Implement device hardening and domain integration using XecureClient for secure infrastructure</li>
-                                <li>Configure and deploy Yubikey hardware authentication for secure user login sessions</li>
-                                <li>Perform technical troubleshooting and maintenance to ensure device integrity and security compliance</li>
+                                <li>XecureClient device hardening</li>
+                                <li>Device join domain</li>
+                                <li>Setup Yubikey configuration for device login</li>
+                                <li>Basic device maintenance tasks and troubleshooting</li>
                             </ul>
                         </div>
                         
@@ -582,7 +795,8 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <img id="footerLogo" src="src/img/2-logo-light.png" alt="Logo" class="footer-logo-img">
+                <img id="footerLogo" src="/src/img/2-logo-light.png" alt="Akhmad Subkhan Logo" class="footer-logo-img"
+                     onerror="this.onerror=null;this.src='/src/img/fallback-logo.svg';this.alt='Logo';">
                 <div>
                     <h3>Akhmad Subkhan</h3>
                     <p>Junior System Administrator</p>
@@ -600,15 +814,40 @@
             
             <div class="footer-copyright">
                 <p>&copy; 2025 Akhmad Subkhan as a Aano. All rights reserved.</p>
+                <p>Version 1.0.4</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Main JavaScript dengan Cloudflare bypass -->
+    <script data-cfasync="false" src="/script.js?v=1.0.4"></script>
+    
+    <!-- Fallback jika JavaScript gagal -->
+    <noscript>
+        <style>
+            #cssLoading { display: none !important; }
+            body { opacity: 1 !important; }
+            .noscript-warning {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: #ffcc00;
+                color: #000;
+                padding: 10px;
+                text-align: center;
+                z-index: 10000;
+                font-weight: bold;
+            }
+        </style>
+        <div class="noscript-warning">
+            JavaScript is disabled. Some features may not work properly.
+        </div>
+    </noscript>
 </body>
 </html>
