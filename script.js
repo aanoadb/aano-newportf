@@ -1,11 +1,57 @@
 /**
  * System Administrator Portfolio - Updated Version
  * Features: Theme toggle, scroll animations, bubbles, form validation
- * Added: Projects pagination with navigation
+ * Added: Projects pagination with navigation, Logo management
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio JavaScript loaded successfully!');
+    
+    // ===== Logo Management =====
+    const navLogo = document.getElementById('navLogo');
+    const footerLogo = document.getElementById('footerLogo');
+    
+    // URL gambar logo dari folder src/img
+    const logoLightUrl = 'src/img/2-logo-light.png'; // Logo untuk light mode
+    const logoDarkUrl = 'src/img/1-logo-dark.png'; // Logo untuk dark mode
+    
+    // Fungsi untuk mengupdate logo berdasarkan tema
+    function updateLogos(theme) {
+        if (theme === 'dark') {
+            // Gunakan logo gelap untuk tema gelap
+            if (navLogo) navLogo.src = logoDarkUrl;
+            if (footerLogo) footerLogo.src = logoDarkUrl;
+        } else {
+            // Gunakan logo terang untuk tema terang
+            if (navLogo) navLogo.src = logoLightUrl;
+            if (footerLogo) footerLogo.src = logoLightUrl;
+        }
+    }
+    
+    // Preload logo images untuk performa lebih baik
+    function preloadLogoImages() {
+        const imgLight = new Image();
+        const imgDark = new Image();
+        
+        imgLight.src = logoLightUrl;
+        imgDark.src = logoDarkUrl;
+        
+        imgLight.onload = function() {
+            console.log('Light logo loaded successfully');
+        };
+        
+        imgDark.onload = function() {
+            console.log('Dark logo loaded successfully');
+        };
+        
+        imgLight.onerror = function() {
+            console.log('Failed to load light logo');
+        };
+        
+        imgDark.onerror = function() {
+            console.log('Failed to load dark logo');
+        };
+    }
     
     // ===== Theme Toggle =====
     const themeToggle = document.getElementById('themeToggle');
@@ -19,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeIcon(currentTheme);
+    updateLogos(currentTheme);
     
     // Theme toggle event
     themeToggle.addEventListener('click', function() {
@@ -26,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.setAttribute('data-theme', currentTheme);
         localStorage.setItem('portfolio-theme', currentTheme);
         updateThemeIcon(currentTheme);
+        updateLogos(currentTheme);
         
         // Update bubbles theme
         setTimeout(() => {
@@ -473,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== Initialize Everything =====
     createBubbles();
     preloadBackgroundImage();
+    preloadLogoImages();
     initProjectsPagination();
     
     // Recreate bubbles on window resize for better positioning

@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <!-- Favicon menggunakan logo -->
+    <link rel="icon" href="src/img/1-logo-dark.png" type="image/png">
 </head>
 <body>
     <!-- Progress Indicator -->
@@ -18,7 +19,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo"><span>Akhmad Subkhan</span></a>
+            <a href="#home" class="nav-logo">
+                <img id="navLogo" src="src/img/2-logo-light.png" alt="Logo" class="nav-logo-img">
+                <span>Akhmad Subkhan</span>
+            </a>
             
             <div class="nav-links">
                 <a href="#about">About</a>
@@ -285,7 +289,19 @@
                     <a href="https://www.credly.com/badges/d8b2528a-4f8a-4436-a77d-6039eda819db/linked_in_profile" target="_blank" rel="noopener noreferrer" class="certificate-id">EX188</a>
                 </div>
             </div>
-            
+
+            <div class="certificate-card" data-logo-color="#ff9900">
+                <div class="certificate-icon">
+                    <i class="fas fa-award bnsp-logo">BNSP</i>
+                </div>
+                <div class="certificate-content">
+                    <h3>Junior Techincal Support</h3>
+                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
+                    <p class="certificate-date">Issued: May 2024</p>
+                    <a href="#" class="certificate-id">Junior</a>
+                </div>
+            </div>
+
             <div class="certificate-card" data-logo-color="#ff9900">
                 <div class="certificate-icon">
                     <i class="fas fa-award bnsp-logo">BNSP</i>
@@ -298,17 +314,6 @@
                 </div>
             </div>
             
-            <div class="certificate-card" data-logo-color="#ff9900">
-                <div class="certificate-icon">
-                    <i class="fas fa-award bnsp-logo">BNSP</i>
-                </div>
-                <div class="certificate-content">
-                    <h3>Junior Techincal Support</h3>
-                    <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
-                    <p class="certificate-date">Issued: Dec 22, 2025</p>
-                    <a href="#" class="certificate-id">Junior</a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -333,17 +338,17 @@
                         <h3 class="project-list-title">MANAGING BKPM OPENSHIFT CLUSTER</h3>
                         <p class="project-list-period">Period: June 2025 - Present</p>
                         <p class="project-list-description">
-                            Designed and deployed a production-grade Kubernetes cluster with automated scaling, monitoring, and disaster recovery for financial services company.
+                            Manage and maintain OpenShift production and staging environments for the Badan Koordinasi Penanaman Modal (BKPM) as an 1st Layer System Administrator.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Monitor and maintain production & staging cluster health and performance</li>
-                                <li>Basic cluster maintenance tasks and troubleshooting</li>
-                                <li>Grafana dashboards monitoring</li>
-                                <li>Elastic Search & Kibana monitoring</li>
-                                <li>Generate cluster health monthly reports</li
+                                <li>Monitor and maintain the health and performance of OpenShift production and staging environments</li>
+                                <li>Execute cluster maintenance and perform initial (L1) troubleshooting for system incidents</li>
+                                <li>Leverage Grafana, Elasticsearch, and Kibana for real-time observability and log analysis</li>
+                                <li>Analyze system metrics to ensure high availability and optimal cluster resource utilization</li>
+                                <li>Generate comprehensive monthly reports regarding cluster health and operational status</li>
                             </ul>
                         </div>
                         
@@ -365,15 +370,17 @@
                         <h3 class="project-list-title">MANAGING JSC OPENSHIFT CLUSTER</h3>
                         <p class="project-list-period">Period: September 2025 - Present</p>
                         <p class="project-list-description">
-                            Led migration of legacy on-premise systems to AWS and Azure with zero downtime, implementing comprehensive monitoring and security controls.
+                            L1 System Administrator responsible for monitoring and maintaining OpenShift production and development environments for Jakarta Smart City (JSC).
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Monitor and maintain production & development cluster health and performance</li>
-                                <li>Basic cluster maintenance tasks and troubleshooting</li>
-                                <li>Generate cluster health monthly reports</li
+                                <li>Monitor and ensure the high availability of OpenShift production and development clusters</li>
+                                <li>Perform OpenShift cluster upgrades and version updates to ensure system stability and security</li>
+                                <li>Execute worker node migrations across environments to optimize resource allocation and infrastructure reliability</li>
+                                <li>Handle cluster maintenance and provide initial (L1) troubleshooting for system alerts and incidents</li>
+                                <li>Compile and deliver comprehensive monthly reports regarding cluster health and performance metrics</li>
                             </ul>
                         </div>
                         
@@ -389,18 +396,18 @@
                         <div class="project-list-year">BKPM</div>
                     </div>
                     <div class="project-list-content">
-                        <h3 class="project-list-title">MANAGING BKPM DYNATRACTE MONITORING SYSTEM</h3>
+                        <h3 class="project-list-title">MANAGING BKPM DYNATRACE MONITORING SYSTEM</h3>
                         <p class="project-list-period">Period: July 2025 - Present</p>
                         <p class="project-list-description">
-                            Built comprehensive monitoring stack using Prometheus, Grafana, and Alertmanager across 100+ servers with custom dashboards and automated alerts.
+                            Monitoring OSS Application at Badan Koordinasi Penanaman Modal (BKPM), focusing on full-stack observability using Dynatrace.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Monitor and maintain production & staging cluster health and performance</li>
-                                <li>Basic cluster maintenance tasks and troubleshooting</li>
-                                <li>Generate cluster health monthly reports</li
+                                <li>Proactively monitor production and staging environments to identify potential performance bottlenecks</li>
+                                <li>Manage initial troubleshooting and system health checks within the Dynatrace platform</li>
+                                <li>Analyze monitoring data to generate detailed monthly reports on system stability and performance</li>
                             </ul>
                         </div>
                         
@@ -422,16 +429,15 @@
                         <h3 class="project-list-title">MANAGING BKPM MICROSOFT DEFENDER</h3>
                         <p class="project-list-period">Period: August 2025 - Present</p>
                         <p class="project-list-description">
-                            Designed and implemented a complete CI/CD pipeline using Jenkins, GitLab CI, and Docker for automated testing and deployment.
+                            L1 support for Badan Koordinasi Penanaman Modal (BKPM), specializing in Microsoft Defender enterprise security.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Daily Monitor and maintain environment health and performance</li>
-                                <li>Basic maintenance tasks and troubleshooting</li>
-                                <li>Generate daily reports</li>
-                                <li>Generate monthly reports</li
+                                <li>Conduct daily monitoring of the security environment to ensure optimal protection and performance</li>
+                                <li>Execute basic security maintenance tasks and provide initial response to security incidents</li>
+                                <li>Develop and present daily and monthly security posture reports</li>
                             </ul>
                         </div>
                         
@@ -450,14 +456,15 @@
                         <h3 class="project-list-title">MANAGING PDAM TRELLIX ePO</h3>
                         <p class="project-list-period">Period: June 2025 - Present</p>
                         <p class="project-list-description">
-                            Conducted comprehensive network security assessment and implemented hardening measures across enterprise infrastructure.
+                            L1 Endpoint Security Administrator responsible for the maintenance and monitoring of the Trellix ePO environment for PTAM Bandarmasih (PDAM).
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>Basic maintenance tasks and troubleshooting</li>
-                                <li>Generate quarterly reports</li
+                                <li>L1 technical support and routine maintenance for the Trellix ePO management console</li>
+                                <li>Monitor endpoint compliance and perform initial troubleshooting for security agent issues</li>
+                                <li>Generate detailed quarterly reports regarding endpoint security status and system health</li>
                             </ul>
                         </div>
                         
@@ -476,16 +483,15 @@
                         <h3 class="project-list-title">XECURECLIENT DEVICE HARDENING</h3>
                         <p class="project-list-period">Period: August 2025 - Present</p>
                         <p class="project-list-description">
-                            Deployed and configured high-availability PostgreSQL and MySQL database clusters with replication and failover capabilities.
+                            Security Technician at Dukcapil, focused on enhancing workstation security through device hardening and multi-factor authentication setup.
                         </p>
                         
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>XecureClient device hardening</li>
-                                <li>Device join domain</li>
-                                <li>Setup Yubikey configuration for device login</li>
-                                <li>Basic device maintenance tasks and troubleshooting</li>
+                                <li>Implement device hardening and domain integration using XecureClient for secure infrastructure</li>
+                                <li>Configure and deploy Yubikey hardware authentication for secure user login sessions</li>
+                                <li>Perform technical troubleshooting and maintenance to ensure device integrity and security compliance</li>
                             </ul>
                         </div>
                         
@@ -576,7 +582,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <span></span>
+                <img id="footerLogo" src="src/img/2-logo-light.png" alt="Logo" class="footer-logo-img">
                 <div>
                     <h3>Akhmad Subkhan</h3>
                     <p>Junior System Administrator</p>
