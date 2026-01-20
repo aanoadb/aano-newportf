@@ -5,23 +5,17 @@ services:
     build: .
     container_name: portfolio-app
     ports:
+      # Mapping Host:8081 ke Container:8081
       - "8081:8081"
     environment:
-      - DOMAIN=${DOMAIN:-localhost}
-      - SSL_ENABLED=true
-    volumes:
-      # Mount for persistent SSL certificates (optional)
-      - ./ssl-certs:/etc/nginx/ssl:rw
-      # Mount for Cloudflare config (optional - uncomment when ready)
-      # - ./cloudflare.ini:/etc/cloudflare/cloudflare.ini:ro
+      - VIRTUAL_HOST=aanoo.xyz
+      - VIRTUAL_PORT=8081
+      - LETSENCRYPT_HOST=aanoo.xyz
+      - LETSENCRYPT_EMAIL=akhmadsubkhan2212@gmail.com
     restart: unless-stopped
     networks:
-      - portfolio-network
+      - web
 
 networks:
-  portfolio-network:
+  web:
     driver: bridge
-
-# Optional: Uncomment when using Cloudflare DNS
-# volumes:
-#   ssl-certs:
