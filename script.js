@@ -1,3 +1,240 @@
+/** 
+ * Portfolio JavaScript - Auto Refresh System
+ * Version: 3.1
+ * Last Updated: <?php echo date('Y-m-d H:i:s'); ?>
+ */
+
+console.log('🚀 Portfolio JavaScript loaded with auto-refresh system');
+
+// Enhanced auto-refresh functionality
+(function() {
+    'use strict';
+    
+    // Configuration
+    const CONFIG = {
+        version: window.APP_VERSION || '3.1',
+        checkInterval: 5 * 60 * 1000, // 5 minutes
+        debugMode: window.location.search.includes('debug'),
+        storageKeys: {
+            lastCheck: 'portfolio_last_check',
+            currentVersion: 'portfolio_version',
+            assetHashes: 'portfolio_asset_hashes'
+        }
+    };
+    
+    // Asset monitoring
+    class AssetMonitor {
+        constructor() {
+            this.assets = [
+                { url: 'style.css', type: 'css', element: document.getElementById('main-css') },
+                { url: 'script.js', type: 'js', element: document.getElementById('main-js') }
+            ];
+            
+            this.init();
+        }
+        
+        init() {
+            // Store initial hashes
+            this.storeAssetHashes();
+            
+            // Start monitoring
+            setInterval(() => this.checkAssets(), CONFIG.checkInterval);
+            
+            // Check on visibility change
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    this.checkAssets();
+                }
+            });
+            
+            if (CONFIG.debugMode) {
+                console.log('🔍 Asset Monitor initialized');
+                this.logAssets();
+            }
+        }
+        
+        async storeAssetHashes() {
+            try {
+                const hashes = {};
+                
+                for (const asset of this.assets) {
+                    try {
+                        const response = await fetch(asset.url, {
+                            method: 'GET',
+                            headers: { 'Cache-Control': 'no-cache' },
+                            cache: 'no-store'
+                        });
+                        
+                        if (response.ok) {
+                            const text = await response.text();
+                            const hash = this.generateHash(text);
+                            hashes[asset.url] = hash;
+                        }
+                    } catch (error) {
+                        console.warn(`Failed to fetch ${asset.url}:`, error);
+                    }
+                }
+                
+                localStorage.setItem(CONFIG.storageKeys.assetHashes, JSON.stringify(hashes));
+                
+                if (CONFIG.debugMode) {
+                    console.log('💾 Asset hashes stored:', hashes);
+                }
+            } catch (error) {
+                console.error('Error storing asset hashes:', error);
+            }
+        }
+        
+        async checkAssets() {
+            try {
+                const storedHashes = JSON.parse(localStorage.getItem(CONFIG.storageKeys.assetHashes) || '{}');
+                let needsRefresh = false;
+                
+                for (const asset of this.assets) {
+                    try {
+                        const response = await fetch(asset.url, {
+                            method: 'GET',
+                            headers: { 'Cache-Control': 'no-cache' },
+                            cache: 'no-store'
+                        });
+                        
+                        if (response.ok) {
+                            const text = await response.text();
+                            const currentHash = this.generateHash(text);
+                            const storedHash = storedHashes[asset.url];
+                            
+                            if (storedHash && currentHash !== storedHash) {
+                                console.log(`🔄 Asset changed: ${asset.url}`);
+                                needsRefresh = true;
+                                
+                                // Update hash
+                                storedHashes[asset.url] = currentHash;
+                            }
+                        }
+                    } catch (error) {
+                        console.warn(`Error checking ${asset.url}:`, error);
+                    }
+                }
+                
+                // Update stored hashes
+                localStorage.setItem(CONFIG.storageKeys.assetHashes, JSON.stringify(storedHashes));
+                
+                if (needsRefresh) {
+                    this.notifyUser();
+                }
+                
+                // Update last check timestamp
+                localStorage.setItem(CONFIG.storageKeys.lastCheck, Date.now());
+                
+            } catch (error) {
+                console.error('Error checking assets:', error);
+            }
+        }
+        
+        generateHash(str) {
+            // Simple hash function
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString(36);
+        }
+        
+        notifyUser() {
+            // Create notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: var(--accent-color);
+                color: var(--bg-primary);
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                cursor: pointer;
+                font-family: 'Inter', sans-serif;
+                font-weight: 500;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>🔄 Update Available</span>
+                    <button style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                        Refresh Now
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Add click handler
+            notification.addEventListener('click', () => {
+                localStorage.clear();
+                window.location.reload();
+            });
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideIn 0.3s ease reverse';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 10000);
+        }
+        
+        logAssets() {
+            console.group('📦 Assets Monitoring');
+            console.log('Version:', CONFIG.version);
+            console.log('Check Interval:', CONFIG.checkInterval / 1000, 'seconds');
+            console.log('Assets:', this.assets.map(a => a.url));
+            console.groupEnd();
+        }
+    }
+    
+    // Initialize when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize asset monitor
+        if (typeof window.AssetMonitor === 'undefined') {
+            window.AssetMonitor = new AssetMonitor();
+        }
+        
+        // Check version mismatch on load
+        const storedVersion = localStorage.getItem(CONFIG.storageKeys.currentVersion);
+        if (storedVersion && storedVersion !== CONFIG.version) {
+            console.log(`🔄 Version mismatch: ${storedVersion} → ${CONFIG.version}`);
+            localStorage.clear();
+            window.location.reload();
+            return;
+        }
+        
+        // Store current version
+        localStorage.setItem(CONFIG.storageKeys.currentVersion, CONFIG.version);
+        
+        // Log initialization
+        console.log(`✅ Portfolio v${CONFIG.version} initialized with auto-refresh`);
+    });
+    
+    // Export for debugging
+    window.PortfolioConfig = CONFIG;
+    
+})();
+
+// ... (kode JavaScript Anda yang sebelumnya tetap sama di bawah ini) ...
 /**
  * System Administrator Portfolio - Updated Version
  * Features: Theme toggle, scroll animations, bubbles, form validation

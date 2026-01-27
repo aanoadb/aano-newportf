@@ -4,11 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akhmad Subkhan</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Auto-versioning CSS - Will be updated by JavaScript -->
+    <link rel="stylesheet" href="style.css" id="main-css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Favicon menggunakan logo -->
     <link rel="icon" href="src/img/1-logo-dark.png" type="image/png">
+    
+    <!-- Auto-refresh script -->
+    <script>
+        // Version management for cache busting
+        const APP_VERSION = '3.1'; // CHANGE THIS ON EVERY DEPLOY
+        const CHECK_INTERVAL = 5 * 60 * 1000; // Check every 5 minutes (300000 ms)
+        const LAST_CHECK_KEY = 'last_version_check';
+        const CURRENT_VERSION_KEY = 'current_version';
+        
+        // Apply version to assets
+        function applyVersioning() {
+            // Update CSS version
+            const cssLink = document.getElementById('main-css');
+            if (cssLink) {
+                const currentHref = cssLink.getAttribute('href');
+                const cleanHref = currentHref.split('?')[0];
+                cssLink.setAttribute('href', cleanHref + '?v=' + APP_VERSION);
+                
+                // Preload to avoid FOUC (Flash of Unstyled Content)
+                const preloadLink = document.createElement('link');
+                preloadLink.rel = 'preload';
+                preloadLink.as = 'style';
+                preloadLink.href = cleanHref + '?v=' + APP_VERSION;
+                document.head.appendChild(preloadLink);
+            }
+            
+            // Store current version in localStorage
+            localStorage.setItem(CURRENT_VERSION_KEY, APP_VERSION);
+            localStorage.setItem(LAST_CHECK_KEY, Date.now());
+            
+            // Log for debugging
+            console.log(`🌐 Portfolio v${APP_VERSION} loaded - ${new Date().toLocaleTimeString()}`);
+        }
+        
+        // Check for updates periodically
+        function checkForUpdates() {
+            const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
+            const currentVersion = localStorage.getItem(CURRENT_VERSION_KEY);
+            
+            // If version changed, force refresh
+            if (currentVersion !== APP_VERSION) {
+                console.log(`🔄 New version detected: ${currentVersion} → ${APP_VERSION}. Refreshing...`);
+                localStorage.clear(); // Clear all cache
+                window.location.reload();
+                return;
+            }
+            
+            // Check if it's time to check again (every 5 minutes)
+            const now = Date.now();
+            if (!lastCheck || (now - lastCheck) > CHECK_INTERVAL) {
+                console.log('🔍 Checking for updates...');
+                
+                // Fetch the HTML to check for changes
+                fetch(window.location.href, {
+                    method: 'HEAD',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                })
+                .then(response => {
+                    const serverETag = response.headers.get('etag');
+                    const serverLastModified = response.headers.get('last-modified');
+                    
+                    // Store server headers for next comparison
+                    localStorage.setItem('server_etag', serverETag || '');
+                    localStorage.setItem('server_last_modified', serverLastModified || '');
+                    localStorage.setItem(LAST_CHECK_KEY, now);
+                    
+                    // If we detect changes in future, we can trigger refresh
+                    const previousETag = localStorage.getItem('previous_etag');
+                    const previousLastModified = localStorage.getItem('previous_last_modified');
+                    
+                    if ((serverETag && serverETag !== previousETag) || 
+                        (serverLastModified && serverLastModified !== previousLastModified)) {
+                        console.log('🔄 Server content changed. Refreshing...');
+                        localStorage.setItem('previous_etag', serverETag || '');
+                        localStorage.setItem('previous_last_modified', serverLastModified || '');
+                        setTimeout(() => window.location.reload(), 2000); // Graceful reload
+                    }
+                })
+                .catch(err => console.log('Update check failed:', err));
+            }
+        }
+        
+        // Initialize versioning
+        document.addEventListener('DOMContentLoaded', function() {
+            applyVersioning();
+            
+            // Start periodic update checks
+            setInterval(checkForUpdates, CHECK_INTERVAL);
+            
+            // Also check when user becomes active after being idle
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    checkForUpdates();
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Progress Indicator -->
@@ -310,7 +412,7 @@
                     <h3>Junior Web Progammer</h3>
                     <p class="certificate-issuer">Badan Nasional Sertifikasi Profesi LSP</p>
                     <p class="certificate-date">Issued: Nov 2023</p>
-                    <a href="https://drive.google.com/file/d/1gTrsrMa7AZqUZ1ACV7ymF0PByyKHqeaa/view?usp=drivesdk" target="_blank" rel="noopener noreferrer"class="certificate-id">Junior</a>
+                    <a href="https://drive.google.com/file/d/1gTrsrMa7AZqUZ1ACV7ymF0PByyKHqeaa/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="certificate-id">Junior</a>
                 </div>
             </div>
             
@@ -586,6 +688,7 @@
             
             <div class="footer-copyright">
                 <p>&copy; 2025 Akhmad Subkhan as a Aano. All rights reserved.</p>
+                <small id="version-info">Version: Loading...</small>
             </div>
         </div>
     </footer>
@@ -595,6 +698,30 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <!-- Main JavaScript with auto-versioning -->
+    <script src="script.js" id="main-js"></script>
+    
+    <!-- Version info script -->
+    <script>
+        // Display version in footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const versionInfo = document.getElementById('version-info');
+            if (versionInfo) {
+                versionInfo.textContent = `Version: ${APP_VERSION} | Last update: ${new Date().toLocaleDateString()}`;
+            }
+            
+            // Add refresh button for admin/testing
+            if (window.location.search.includes('debug')) {
+                const refreshBtn = document.createElement('button');
+                refreshBtn.innerHTML = '🔄 Force Refresh';
+                refreshBtn.style.cssText = 'position:fixed;bottom:20px;left:20px;background:#2c2c2c;color:white;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;z-index:9999;';
+                refreshBtn.onclick = function() {
+                    localStorage.clear();
+                    window.location.reload();
+                };
+                document.body.appendChild(refreshBtn);
+            }
+        });
+    </script>
 </body>
 </html>

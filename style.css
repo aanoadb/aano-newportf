@@ -1,3 +1,6 @@
+/* ===== Portfolio CSS - Auto-refresh Enabled ===== */
+/* Version: 3.1 | Last Updated: <?php echo date('Y-m-d H:i:s'); ?> */
+
 /* ===== CSS Variables & Theme Setup ===== */
 :root {
     /* Light Theme Colors - Updated to Elegant Gray */
@@ -1502,4 +1505,18 @@ a:hover {
     .projects-nav-indicator {
         font-size: 0.9rem;
     }
+}
+
+/* Tambahkan di bagian paling bawah CSS */
+/* ===== Version Indicator (Debug) ===== */
+#version-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+#version-info:hover {
+    opacity: 1;
 }
