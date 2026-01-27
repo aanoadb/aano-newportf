@@ -20,7 +20,7 @@
     --bnsp-orange: #ff9900;
     --redhat-red: #ee0000;
     --redhat-blue: #0066cc;
-    --link-color: #0066cc;
+    --link-color: #2c2c2c; /* Changed from blue to dark gray */
 }
 
 [data-theme="dark"] {
@@ -38,7 +38,7 @@
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --terminal-bg: #000000;
     --terminal-text: #00ff00;
-    --link-color: #4dabf7;
+    --link-color: #ffffff; /* Changed to white for dark mode */
 }
 
 /* ===== Base Styles ===== */
@@ -85,16 +85,17 @@ h3 {
     color: var(--text-muted);
 }
 
-/* ===== Links ===== */
+/* ===== Links - NO UNDERLINE ON HOVER ===== */
 a {
     color: var(--link-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
+/* HILANGKAN UNDERLINE PADA HOVER UNTUK SEMUA LINK */
 a:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
+    color: var(--text-primary); /* Keep same color on hover */
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 /* ===== Scroll Progress ===== */
@@ -149,6 +150,12 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-logo:hover {
+    color: var(--text-primary); /* Keep same color */
+    text-decoration: none; /* No underline */
 }
 
 .nav-links {
@@ -185,6 +192,7 @@ a:hover {
 .nav-links a:hover,
 .nav-links a.active {
     color: var(--text-primary);
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 .nav-actions {
@@ -242,6 +250,12 @@ a:hover {
     padding: 0.5rem 0;
     font-weight: 500;
     border-bottom: 1px solid var(--border-color);
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+    color: var(--text-primary);
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 .mobile-nav-link:last-child {
@@ -705,7 +719,7 @@ a:hover {
     color: var(--bg-primary);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 .social-link-labeled i {
@@ -950,7 +964,7 @@ a:hover {
     color: var(--bg-primary);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 /* ===== Projects Section ===== */
@@ -1236,6 +1250,7 @@ a:hover {
     letter-spacing: 0.1em;
 }
 
+/* Contact Section Links - NO UNDERLINE ON HOVER */
 .contact-simple-item p,
 .contact-simple-item a {
     color: var(--text-primary);
@@ -1243,11 +1258,12 @@ a:hover {
     margin: 0;
     font-size: 1rem;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contact-simple-item a:hover {
-    color: var(--link-color);
-    text-decoration: underline;
+    color: var(--text-primary); /* Keep same color on hover */
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 /* ===== Footer ===== */
@@ -1289,6 +1305,7 @@ a:hover {
     justify-content: center;
 }
 
+/* Footer Links - NO UNDERLINE ON HOVER */
 .footer-links a {
     color: var(--text-secondary);
     text-decoration: none;
@@ -1297,7 +1314,8 @@ a:hover {
 }
 
 .footer-links a:hover {
-    color: var(--text-primary);
+    color: var(--text-primary); /* Change to primary text color */
+    text-decoration: none; /* NO UNDERLINE on hover */
 }
 
 .footer-copyright {
