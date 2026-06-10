@@ -1065,7 +1065,6 @@ a:hover {
 }
 
 .project-list-period::before {
-    content: "📅";
     font-size: 0.8rem;
 }
 
