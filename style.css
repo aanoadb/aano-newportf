@@ -23,7 +23,7 @@
     --bnsp-orange: #ff9900;
     --redhat-red: #ee0000;
     --redhat-blue: #0066cc;
-    --link-color: #2c2c2c; /* Changed from blue to dark gray */
+    --link-color: #2c2c2c;
 }
 
 [data-theme="dark"] {
@@ -41,7 +41,7 @@
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --terminal-bg: #000000;
     --terminal-text: #00ff00;
-    --link-color: #ffffff; /* Changed to white for dark mode */
+    --link-color: #ffffff;
 }
 
 /* ===== Base Styles ===== */
@@ -49,6 +49,77 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* === CUSTOM CURSOR - SEMBUNYIKAN DEFAULT CURSOR === */
+body {
+    cursor: none !important;
+}
+
+/* Tampilkan kursor default hanya pada elemen interaktif di desktop (agar tidak mengganggu) */
+@media (min-width: 768px) {
+    a, button, .skill-tag, .certificate-card, .project-list-item, 
+    .social-link-labeled, .projects-nav-btn, .back-to-top,
+    .theme-toggle, .menu-toggle, .nav-logo, .footer-links a,
+    .contact-simple-item, .certificate-id, .timeline-content,
+    .project-list-tech span, .timeline-tech span {
+        cursor: pointer;
+    }
+}
+
+/* Titik tengah - bergerak langsung */
+.custom-cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    will-change: transform;
+}
+
+/* Lingkaran luar - mengejar dengan lag */
+.custom-cursor-ring {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 2px solid;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+    will-change: transform;
+}
+
+/* Warna border lingkaran sesuai tema */
+[data-theme="light"] .custom-cursor-ring {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+[data-theme="dark"] .custom-cursor-ring {
+    border-color: #f8f9fa;
+    box-shadow: 0 0 6px rgba(255,255,255,0.3);
+}
+
+/* Saat hover pada elemen interaktif: lingkaran membesar, titik tetap kecil */
+.custom-cursor-ring.hover {
+    width: 48px;
+    height: 48px;
+}
+
+/* Sembunyikan custom cursor di perangkat sentuh */
+@media (max-width: 768px) {
+    .custom-cursor-dot,
+    .custom-cursor-ring {
+        display: none;
+    }
+    body {
+        cursor: auto !important;
+    }
 }
 
 html {
@@ -95,10 +166,9 @@ a {
     transition: color 0.3s ease;
 }
 
-/* HILANGKAN UNDERLINE PADA HOVER UNTUK SEMUA LINK */
 a:hover {
-    color: var(--text-primary); /* Keep same color on hover */
-    text-decoration: none; /* NO UNDERLINE on hover */
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 /* ===== Scroll Progress ===== */
@@ -109,7 +179,7 @@ a:hover {
     width: 100%;
     height: 3px;
     background: transparent;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 .progress-bar {
@@ -157,8 +227,8 @@ a:hover {
 }
 
 .nav-logo:hover {
-    color: var(--text-primary); /* Keep same color */
-    text-decoration: none; /* No underline */
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 .nav-links {
@@ -195,7 +265,7 @@ a:hover {
 .nav-links a:hover,
 .nav-links a.active {
     color: var(--text-primary);
-    text-decoration: none; /* NO UNDERLINE on hover */
+    text-decoration: none;
 }
 
 .nav-actions {
@@ -258,7 +328,7 @@ a:hover {
 
 .mobile-nav-link:hover {
     color: var(--text-primary);
-    text-decoration: none; /* NO UNDERLINE on hover */
+    text-decoration: none;
 }
 
 .mobile-nav-link:last-child {
@@ -454,14 +524,7 @@ a:hover {
     }
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(1deg); }
-    50% { transform: translateY(0) rotate(0deg); }
-    75% { transform: translateY(-5px) rotate(-1deg); }
-}
-
-/* Terminal Styling - Updated for Light Mode */
+/* Terminal Styling */
 .hero-terminal {
     width: 100%;
     max-width: 800px;
@@ -473,7 +536,6 @@ a:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     margin-bottom: 3rem;
     transform: translateY(0);
-    animation: 6s ease-in-out infinite;
     border: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1;
@@ -684,19 +746,12 @@ a:hover {
     align-items: start;
 }
 
-.about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0rem;
-    color: var(--text-primary);
-}
-
 .about-text p {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
     line-height: 1.8;
 }
 
-/* Social Links with Labels */
 .social-links-with-labels {
     display: flex;
     gap: 1.5rem;
@@ -722,7 +777,7 @@ a:hover {
     color: var(--bg-primary);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* NO UNDERLINE on hover */
+    text-decoration: none;
 }
 
 .social-link-labeled i {
@@ -908,7 +963,6 @@ a:hover {
     transform: scale(1.1);
 }
 
-/* BNSP Logo Styling */
 .bnsp-logo {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -946,7 +1000,6 @@ a:hover {
     margin-bottom: 0.8rem;
 }
 
-/* Certificate ID as Link */
 .certificate-id {
     display: inline-block;
     background: var(--bg-tertiary);
@@ -967,7 +1020,7 @@ a:hover {
     color: var(--bg-primary);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* NO UNDERLINE on hover */
+    text-decoration: none;
 }
 
 /* ===== Projects Section ===== */
@@ -994,7 +1047,6 @@ a:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Project List Item */
 .project-list-item {
     background: var(--card-bg);
     border-radius: 15px;
@@ -1064,10 +1116,6 @@ a:hover {
     gap: 0.5rem;
 }
 
-.project-list-period::before {
-    font-size: 0.8rem;
-}
-
 .project-list-description {
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
@@ -1075,7 +1123,6 @@ a:hover {
     font-size: 1rem;
 }
 
-/* Job Desk Styling */
 .project-list-jobdesk {
     margin: 1.5rem 0;
     padding: 1.2rem;
@@ -1131,7 +1178,6 @@ a:hover {
     font-family: 'JetBrains Mono', monospace;
 }
 
-/* Projects Navigation */
 .projects-navigation {
     display: flex;
     justify-content: center;
@@ -1193,12 +1239,6 @@ a:hover {
     text-align: center;
 }
 
-.contact-simple-content h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
 .contact-simple-content p {
     color: var(--text-secondary);
     margin-bottom: 3rem;
@@ -1252,7 +1292,6 @@ a:hover {
     letter-spacing: 0.1em;
 }
 
-/* Contact Section Links - NO UNDERLINE ON HOVER */
 .contact-simple-item p,
 .contact-simple-item a {
     color: var(--text-primary);
@@ -1264,8 +1303,8 @@ a:hover {
 }
 
 .contact-simple-item a:hover {
-    color: var(--text-primary); /* Keep same color on hover */
-    text-decoration: none; /* NO UNDERLINE on hover */
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 /* ===== Footer ===== */
@@ -1307,7 +1346,6 @@ a:hover {
     justify-content: center;
 }
 
-/* Footer Links - NO UNDERLINE ON HOVER */
 .footer-links a {
     color: var(--text-secondary);
     text-decoration: none;
@@ -1316,8 +1354,8 @@ a:hover {
 }
 
 .footer-links a:hover {
-    color: var(--text-primary); /* Change to primary text color */
-    text-decoration: none; /* NO UNDERLINE on hover */
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
 .footer-copyright {
@@ -1494,7 +1532,7 @@ a:hover {
     .projects-navigation {
         gap: 1rem;
     }
-    
+
     .projects-nav-btn {
         width: 35px;
         height: 35px;
@@ -1506,8 +1544,6 @@ a:hover {
     }
 }
 
-/* Tambahkan di bagian paling bawah CSS */
-/* ===== Version Indicator (Debug) ===== */
 #version-info {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
