@@ -15,21 +15,18 @@
     <!-- Auto-refresh script -->
     <script>
         // Version management for cache busting
-        const APP_VERSION = '3.1'; // CHANGE THIS ON EVERY DEPLOY
-        const CHECK_INTERVAL = 5 * 60 * 1000; // Check every 5 minutes (300000 ms)
+        const APP_VERSION = '3.1';
+        const CHECK_INTERVAL = 5 * 60 * 1000;
         const LAST_CHECK_KEY = 'last_version_check';
         const CURRENT_VERSION_KEY = 'current_version';
         
-        // Apply version to assets
         function applyVersioning() {
-            // Update CSS version
             const cssLink = document.getElementById('main-css');
             if (cssLink) {
                 const currentHref = cssLink.getAttribute('href');
                 const cleanHref = currentHref.split('?')[0];
                 cssLink.setAttribute('href', cleanHref + '?v=' + APP_VERSION);
                 
-                // Preload to avoid FOUC (Flash of Unstyled Content)
                 const preloadLink = document.createElement('link');
                 preloadLink.rel = 'preload';
                 preloadLink.as = 'style';
@@ -37,83 +34,61 @@
                 document.head.appendChild(preloadLink);
             }
             
-            // Store current version in localStorage
             localStorage.setItem(CURRENT_VERSION_KEY, APP_VERSION);
             localStorage.setItem(LAST_CHECK_KEY, Date.now());
-            
-            // Log for debugging
             console.log(`🌐 Portfolio v${APP_VERSION} loaded - ${new Date().toLocaleTimeString()}`);
         }
         
-        // Check for updates periodically
         function checkForUpdates() {
             const lastCheck = localStorage.getItem(LAST_CHECK_KEY);
             const currentVersion = localStorage.getItem(CURRENT_VERSION_KEY);
             
-            // If version changed, force refresh
             if (currentVersion !== APP_VERSION) {
                 console.log(`🔄 New version detected: ${currentVersion} → ${APP_VERSION}. Refreshing...`);
-                localStorage.clear(); // Clear all cache
+                localStorage.clear();
                 window.location.reload();
                 return;
             }
             
-            // Check if it's time to check again (every 5 minutes)
             const now = Date.now();
             if (!lastCheck || (now - lastCheck) > CHECK_INTERVAL) {
                 console.log('🔍 Checking for updates...');
-                
-                // Fetch the HTML to check for changes
                 fetch(window.location.href, {
                     method: 'HEAD',
-                    headers: {
-                        'Cache-Control': 'no-cache',
-                        'Pragma': 'no-cache'
-                    }
+                    headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
                 })
                 .then(response => {
                     const serverETag = response.headers.get('etag');
                     const serverLastModified = response.headers.get('last-modified');
-                    
-                    // Store server headers for next comparison
                     localStorage.setItem('server_etag', serverETag || '');
                     localStorage.setItem('server_last_modified', serverLastModified || '');
                     localStorage.setItem(LAST_CHECK_KEY, now);
                     
-                    // If we detect changes in future, we can trigger refresh
                     const previousETag = localStorage.getItem('previous_etag');
                     const previousLastModified = localStorage.getItem('previous_last_modified');
-                    
                     if ((serverETag && serverETag !== previousETag) || 
                         (serverLastModified && serverLastModified !== previousLastModified)) {
                         console.log('🔄 Server content changed. Refreshing...');
                         localStorage.setItem('previous_etag', serverETag || '');
                         localStorage.setItem('previous_last_modified', serverLastModified || '');
-                        setTimeout(() => window.location.reload(), 2000); // Graceful reload
+                        setTimeout(() => window.location.reload(), 2000);
                     }
                 })
                 .catch(err => console.log('Update check failed:', err));
             }
         }
         
-        // Initialize versioning
         document.addEventListener('DOMContentLoaded', function() {
             applyVersioning();
-            
-            // Start periodic update checks
             setInterval(checkForUpdates, CHECK_INTERVAL);
-            
-            // Also check when user becomes active after being idle
             document.addEventListener('visibilitychange', function() {
-                if (!document.hidden) {
-                    checkForUpdates();
-                }
+                if (!document.hidden) checkForUpdates();
             });
         });
     </script>
 </head>
 <body>
-    <!-- ===== CUSTOM CURSOR DUA ELEMEN ===== -->
+    <!-- Custom Cursor Dua Elemen -->
     <div class="custom-cursor-dot" id="customCursorDot"></div>
     <div class="custom-cursor-ring" id="customCursorRing"></div>
 
@@ -162,7 +137,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
-        <!-- Background dengan Gambar -->
         <div class="hero-bg">
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" 
                  alt="Server Room Background" 
@@ -170,7 +144,6 @@
             <div class="hero-bg-overlay"></div>
         </div>
 
-        <!-- Bubbles Elegan -->
         <div class="bubbles-container" id="bubblesContainer"></div>
 
         <div class="hero-terminal">
@@ -226,17 +199,12 @@
             <div class="about-text">
                 <p>I am Akhmad Subkhan, a Junior System Administrator at PT Dasa Aprilindo Sentosa and a graduate of SMKN 1 Adiwerna. Currently serving as a 1st layer system administrator, I specialize in managing Red Hat systems and monitoring performance with Dynatrace.</p>
                 
-                <p>I am also proficient in maintaining security through Microsoft Defender, Trellix, and Xecureclient, ensuring robust and reliable IT infrastructure. Enjoy and Stay Classy. </p>
+                <p>I am also proficient in maintaining security through Microsoft Defender, Trellix, and Xecureclient, ensuring robust and reliable IT infrastructure. Enjoy and Stay Classy.</p>
                 
-                <!-- Social Links with Labels -->
                 <div class="social-links-with-labels">
                     <a href="https://www.linkedin.com/in/akhmad-subkhan-863b82244/" target="_blank" rel="noopener noreferrer" class="social-link-labeled">
                         <i class="fab fa-linkedin"></i>
                         <span>Akhmad Subkhan</span>
-                    </a>
-                    <a href="https://github.com/aanoadb" target="_blank" rel="noopener noreferrer" class="social-link-labeled">
-                        <i class="fab fa-github"></i>
-                        <span>aanoadb</span>
                     </a>
                 </div>
             </div>
@@ -415,7 +383,6 @@
                     <a href="https://drive.google.com/file/d/1gTrsrMa7AZqUZ1ACV7ymF0PByyKHqeaa/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="certificate-id">Junior</a>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -427,9 +394,8 @@
             <div class="section-line"></div>
         </div>
         
-        <!-- Projects Container -->
         <div class="projects-container" id="projectsContainer">
-            <!-- Page 1 - Visible by default -->
+            <!-- Page 1 -->
             <div class="projects-page active">
                 <div class="project-list-item">
                     <div class="project-list-header">
@@ -442,7 +408,6 @@
                         <p class="project-list-description">
                             Manage and maintain OpenShift production and staging environments for the Indonesia National Government as an 1st Layer System Administrator.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -453,7 +418,6 @@
                                 <li>Generate comprehensive monthly reports regarding cluster health and operational status</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>OpenShift Container Platform</span>
                             <span>Prometheus & Grafana</span>
@@ -474,7 +438,6 @@
                         <p class="project-list-description">
                             1st Layer System Administrator responsible for monitoring and maintaining OpenShift production and development environments for the Jakarta Regional Government.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -485,7 +448,6 @@
                                 <li>Compile and deliver comprehensive monthly reports regarding cluster health and performance metrics</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>Red Hat OpenShift Container Platform</span>
                         </div>
@@ -503,7 +465,6 @@
                         <p class="project-list-description">
                             Monitoring OSS Application at Indonesia National Government, focusing on Application Performance Monitoring using Dynatrace.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -512,7 +473,6 @@
                                 <li>Analyze monitoring data to generate detailed monthly reports on system stability and performance</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>APM</span>
                             <span>Dynatrace</span>
@@ -521,7 +481,7 @@
                 </div>
             </div>
             
-            <!-- Page 2 - Hidden by default -->
+            <!-- Page 2 -->
             <div class="projects-page">
                 <div class="project-list-item">
                     <div class="project-list-header">
@@ -534,7 +494,6 @@
                         <p class="project-list-description">
                             1st Layer Security Administrator for Indonesia National Government, specializing in Microsoft Defender enterprise security.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -543,7 +502,6 @@
                                 <li>Develop and present daily and monthly security posture reports</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>EDR</span>
                             <span>Microsoft Defender</span>
@@ -562,16 +520,14 @@
                         <p class="project-list-description">
                             1st Layer Endpoint Security Administrator responsible for the maintenance and monitoring of the Trellix ePO environment for Indonesia National Government.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
-                                <li>1st layertechnical support and routine maintenance for the Trellix ePO management console</li>
+                                <li>1st layer technical support and routine maintenance for the Trellix ePO management console</li>
                                 <li>Monitor endpoint compliance and perform initial troubleshooting for security agent issues</li>
                                 <li>Generate detailed quarterly reports regarding endpoint security status and system health</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>EDR</span>
                             <span>Trellix ePO</span>
@@ -590,7 +546,6 @@
                         <p class="project-list-description">
                             1st Layer Security Technician at Indonesia National Government, focused on enhancing workstation security through device hardening and multi-factor authentication setup.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -599,7 +554,6 @@
                                 <li>Perform technical troubleshooting and maintenance to ensure device integrity and security compliance</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>XecureClient Desktop</span>
                             <span>Yubikey</span>
@@ -618,7 +572,6 @@
                         <p class="project-list-description">
                             Central technical for operational stabilization, national application deployment, and user onboarding prior to transitioning to the permanent support team.
                         </p>
-                        
                         <div class="project-list-jobdesk">
                             <strong>Job Desk:</strong>
                             <ul>
@@ -627,7 +580,6 @@
                                 <li>Conducted technical training sessions for onboarding IT personnel and authored comprehensive user manuals to ensure a standardized transition</li>
                             </ul>
                         </div>
-                        
                         <div class="project-list-tech">
                             <span>IT Support</span>
                             <span>IT Helpdesk</span>
@@ -637,7 +589,6 @@
             </div>
         </div>
         
-        <!-- Navigation -->
         <div class="projects-navigation">
             <button class="projects-nav-btn" id="prevProjects" aria-label="Previous projects">
                 <i class="fas fa-chevron-left"></i>
@@ -672,24 +623,10 @@
                         </div>
                     </div>
                     <div class="contact-simple-item">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <a href="https://www.linkedin.com/in/akhmad-subkhan-863b82244/" target="_blank" rel="noopener noreferrer">Akhmad Subkhan</a>
-                        </div>
-                    </div>
-                    <div class="contact-simple-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Location</h4>
                             <p>Jakarta, Indonesia</p>
-                        </div>
-                    </div>
-                    <div class="contact-simple-item">
-                        <i class="fab fa-github"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <a href="https://github.com/aanoadb" target="_blank" rel="noopener noreferrer">aanoadb</a>
                         </div>
                     </div>
                 </div>
@@ -697,26 +634,25 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer Baru: kiri (logo + nama + jabatan) dan kanan (link Email, LinkedIn, GitHub) -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-logo">
-                <img id="footerLogo" src="src/img/2-logo-light.png" alt="Logo" class="footer-logo-img">
-                <div>
-                    <h3>Akhmad Subkhan</h3>
-                    <p>Junior System Administrator</p>
+            <div class="footer-row">
+                <div class="footer-left">
+                    <img id="footerLogo" src="src/img/2-logo-light.png" alt="Logo" class="footer-logo-img">
+                    <div class="footer-info">
+                        <h3>Akhmad Subkhan</h3>
+                        <p>Junior System Administrator</p>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="mailto:akhmadsubkhan2212@gmail.com">Email</a>
+                        <a href="https://www.linkedin.com/in/akhmad-subkhan-863b82244/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://github.com/aanoadb" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#skills">Tech Stack</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
-            
             <div class="footer-copyright">
                 <p>&copy; 2025 Akhmad Subkhan as a Aano. All rights reserved.</p>
             </div>
@@ -728,27 +664,15 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Main JavaScript with auto-versioning -->
     <script src="script.js" id="main-js"></script>
     
-    <!-- Version info script -->
     <script>
-        // Display version in footer
         document.addEventListener('DOMContentLoaded', function() {
-            const versionInfo = document.getElementById('version-info');
-            if (versionInfo) {
-                versionInfo.textContent = `Version: ${APP_VERSION} | Last update: ${new Date().toLocaleDateString()}`;
-            }
-            
-            // Add refresh button for admin/testing
             if (window.location.search.includes('debug')) {
                 const refreshBtn = document.createElement('button');
                 refreshBtn.innerHTML = '🔄 Force Refresh';
                 refreshBtn.style.cssText = 'position:fixed;bottom:20px;left:20px;background:#2c2c2c;color:white;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;z-index:9999;';
-                refreshBtn.onclick = function() {
-                    localStorage.clear();
-                    window.location.reload();
-                };
+                refreshBtn.onclick = function() { localStorage.clear(); window.location.reload(); };
                 document.body.appendChild(refreshBtn);
             }
         });
